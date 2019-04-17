@@ -1,0 +1,13 @@
+<suite name="suite1" parallel="tests">
+
+	<test name="smoke">
+		<parameters>
+			<parameter name="browser" value="chrome" />
+		</parameters>
+		<classes>
+			<class name="com.wd.tng.OhrmAddEmpTest_Reports_All" />
+		</classes>
+
+	</test>
+
+</suite>

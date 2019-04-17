@@ -7,6 +7,7 @@ public class Demo {
 
 		System.out.println("new class file");
 		System.out.println("second change");
+		System.out.println("change from remote");
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.wd.tng;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -26,7 +27,7 @@ import com.wd.util.WebUtil;
 public class OhrmAddEmpTest_Reports_All extends OhrmBaseTest {
 
 	@Test
-	public void login() {
+	public void login() throws IOException {
 		ExtentTest loginTest = test.createNode("Login");
 
 		try {
@@ -51,13 +52,19 @@ public class OhrmAddEmpTest_Reports_All extends OhrmBaseTest {
 			// click on login
 			driver.findElement(By.id("btnLogin")).click();
 			loginTest.log(Status.PASS, "clicked on login button");
-			Assert.assertTrue(WebUtil.isElementExist(driver, By.linkText("PIM")), "isLoginSuccessful");
+			Assert.assertTrue(WebUtil.isElementExist(driver, By.linkText("PIM1")), "isLoginSuccessful");
 			loginTest.log(Status.PASS, "Login successful");
 		} catch (Exception t) {
-			loginTest.log(Status.FAIL, "failed to login because of element identification");
+			
+			try {
+				loginTest.log(Status.FAIL, "failed to login because of element identification").addScreenCaptureFromPath(WebUtil.getScreen(driver));
+			} catch (IOException e) {
+				loginTest.log(Status.FAIL, "failed to login because of element identification: Screen capture not found");
+				e.printStackTrace();
+			}
 			Assert.fail("Failed To Login" + t.getMessage());
 		} catch (Error e) {
-			loginTest.log(Status.FAIL, "failed to login because of verification failure");
+			loginTest.log(Status.FAIL, "failed to login because of verification failure").addScreenCaptureFromPath(WebUtil.getScreen(driver));
 			Assert.fail("Failed To Login" + e.getMessage());
 		} finally {
 			extent.flush();
@@ -65,7 +72,7 @@ public class OhrmAddEmpTest_Reports_All extends OhrmBaseTest {
 	}
 
 	@Test(dependsOnMethods = "login")
-	public void addEmployee() {
+	public void addEmployee() throws IOException {
 		ExtentTest addEmpTest = test.createNode("AddEmp");
 		try {
 
@@ -78,10 +85,10 @@ public class OhrmAddEmpTest_Reports_All extends OhrmBaseTest {
 			Assert.assertTrue(WebUtil.isElementExist(driver, By.linkText("PIM")), "isLoginSuccessful");
 			addEmpTest.log(Status.PASS, "Employee added");
 		} catch (Exception t) {
-			addEmpTest.log(Status.FAIL, "failed to add employee because of element identification");
+			addEmpTest.log(Status.FAIL, "failed to add employee because of element identification").addScreenCaptureFromPath(WebUtil.getScreen(driver));
 			Assert.fail("Failed To add employee" + t.getMessage());
 		} catch (Error e) {
-			addEmpTest.log(Status.FAIL, "failed to add employee because of verification failure");
+			addEmpTest.log(Status.FAIL, "failed to add employee because of verification failure").addScreenCaptureFromPath(WebUtil.getScreen(driver));
 			Assert.fail("Failed To add employee" + e.getMessage());
 		} finally {
 			extent.flush();

@@ -1,0 +1,10 @@
+<suite name="RetryFailedTests" verbose="1" >
+ <listeners>
+        <listener class-name="com.tng.retry.AnnotationTransformer"/>
+  </listeners>
+  <test name="RetryMulitple">
+    <classes>
+      <class name="com.tng.retry.Test2"/>
+    </classes>
+  </test>
+</suite>

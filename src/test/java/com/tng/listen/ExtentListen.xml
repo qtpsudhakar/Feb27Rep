@@ -1,0 +1,10 @@
+<suite name="AutomaticExtent" verbose="1" >
+ <listeners>
+        <listener class-name="com.tng.listen.ExtentReporterNG"/>
+  </listeners>
+  <test name="extentreport">
+    <classes>
+      <class name="com.tng.listen.OhrmAddEmployee_Report_Listener"/>
+    </classes>
+  </test>
+</suite>

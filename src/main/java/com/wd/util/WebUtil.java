@@ -10,8 +10,19 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-public class WebUtil {
+import com.wd.pom.OhrmBase;
 
+public class WebUtil extends OhrmBase{
+
+	
+	public static void click(By locator, String elmName) {
+		
+		getDriver().findElement(locator).click();
+		
+		System.out.println("Clicked on "+elmName);
+	}
+	
+	
 	public static boolean isElementExist(WebDriver driver, By locator) {
 		try {
 			driver.findElement(locator);

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wd.util.WebUtil;
+
 public class LoginPage extends OhrmBase{
 
 	private By txt_UserName = By.id("txtUsername");
@@ -40,7 +42,8 @@ public class LoginPage extends OhrmBase{
 	}
 
 	public WelcomePage clickLoginButton() {
-		btnLogin().click();
+		//btnLogin().click();
+		WebUtil.click(btn_Login,"Login Button");
 		System.out.println("Clicked on Login Button");
 		return new WelcomePage();
 	}

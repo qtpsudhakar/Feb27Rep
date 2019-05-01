@@ -14,7 +14,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 
-public class C3Apsrtc {
+public class C4Apsrtc_Web {
 
 	public static void main(String[] args) throws MalformedURLException, InterruptedException {
 
@@ -25,36 +25,20 @@ public class C3Apsrtc {
 		// capabilities.setCapability("automationName", "uiautomator2");
 		capabilities.setCapability("deviceName", "emulator-5554");
 		capabilities.setCapability("platformVersion", "7.1.1");
-
-		capabilities.setCapability("appPackage", "com.apsrtc.online");
-		capabilities.setCapability("appActivity", "com.abhibus.app.apsrtc.DashBoardActivity");
-
+		capabilities.setCapability("browserName", "chrome");
+		
 		AppiumDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
 
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
-		driver.findElement(MobileBy.id("com.apsrtc.online:id/bookTextView")).click();
-
-		Thread.sleep(5000);
-
-		System.out.println(driver.getContext());
-		Set<String> cntHandles = driver.getContextHandles();
-
-		for (String cnt : cntHandles) {
-			System.out.println(cnt);
-			if (cnt.toLowerCase().contains("web")) {
-				driver.context(cnt);
-				break;
-			}
-		}
-		System.out.println("switchedTo:" + driver.getContext());
 		
-		driver.findElement(By.xpath("//p[normalize-space()='Book Your Ticket as Guest']")).click();
+		driver.get("http://apsrtconline.in");
+
 		driver.findElement(By.id("fromPlaceName")).sendKeys("hyderabad");
 		driver.findElement(By.linkText("HYDERABAD")).click();
 		
 		driver.findElement(By.id("toPlaceName")).sendKeys("vijayawada");
-		driver.findElement(By.linkText("VIJAYAWADA")).click();
+		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.linkText("VIJAYAWADA"))).click();
+		//driver.findElement(By.linkText("VIJAYAWADA")).click();
 		
 		driver.hideKeyboard();
 		driver.findElement(By.id("txtJourneyDate")).click();
